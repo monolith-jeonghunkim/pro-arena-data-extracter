@@ -1,3 +1,5 @@
 .vscode/*
 obj/*
 Newtonsoft.Json.13.0.1/*
+output/*
+bin/*

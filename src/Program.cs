@@ -45,8 +45,7 @@ class ReadProArenaData
 
             string outputPath = "./output";
             System.IO.Directory.CreateDirectory(outputPath);
-            string outputFileName = String.Format("{0}.txt", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff"));
-            //string outputFilePath = String.Format("{0}/{1}.txt", outputPath, outputFileName);
+            string outputFileName = String.Format("{0}.txt", DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss-fff"));
 
             string pathString = System.IO.Path.Combine(outputPath, outputFileName);
             
