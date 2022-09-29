@@ -6,8 +6,18 @@ using System.Timers;
 class ReadProArenaData
 {
      private static System.Timers.Timer aTimer = new System.Timers.Timer(1000);
-    static void Main()
+     private static string outputPath = "";
+     private static int interval = 1000;
+     private static string dataFilePath = "";
+    static void Main(string [] args)
     {
+
+
+        interval = Int32.Parse(args[0]);
+        dataFilePath = args[1];
+        outputPath = args[2];
+
+
         SetTimer();
 
         Console.ReadLine();
@@ -18,7 +28,7 @@ class ReadProArenaData
     private static void SetTimer()
    {
         // Create a timer with a two second interval.
-        aTimer = new System.Timers.Timer(10000);
+        aTimer = new System.Timers.Timer(interval);
         // Hook up the Elapsed event for the timer. 
         aTimer.Elapsed += OnTimedEvent;
         aTimer.AutoReset = true;
@@ -34,7 +44,7 @@ class ReadProArenaData
 
     static void readPlayersData()
     {
-        using(var db = new LiteDB.LiteDatabase("./data/players.data"))
+        using(var db = new LiteDB.LiteDatabase(dataFilePath))
         {
             // Get a collection (or create, if doesn't exist)
             var col = db.GetCollection<SerializedStored>("player");
@@ -42,8 +52,6 @@ class ReadProArenaData
             // Use LINQ to query documents (filter, sort, transform)
             var results = col.FindAll().OrderByDescending(x => x._id);
             
-
-            string outputPath = "./output";
             System.IO.Directory.CreateDirectory(outputPath);
             string outputFileName = String.Format("{0}.txt", DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss-fff"));
 
@@ -52,7 +60,7 @@ class ReadProArenaData
             using StreamWriter file = new(pathString);
 
             
-            
+
             // print results
             foreach(var x in results)
             {
