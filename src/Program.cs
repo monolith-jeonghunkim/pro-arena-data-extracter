@@ -52,6 +52,7 @@ class ReadProArenaData
             using StreamWriter file = new(pathString);
 
             
+            
             // print results
             foreach(var x in results)
             {
