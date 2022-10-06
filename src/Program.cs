@@ -11,7 +11,12 @@ class ReadProArenaData
      private static string dataFilePath = "";
     static void Main(string [] args)
     {
-
+        // 아규먼트 길이 체크
+        if (args.Length < 2)
+        {
+            Console.WriteLine("Usage: pro-arena-data-extracter <interval millisecond> <data file path> <output path>  ");
+            return;
+        }
 
         interval = Int32.Parse(args[0]);
         dataFilePath = args[1];
@@ -82,7 +87,7 @@ class ReadProArenaData
 
 
 
-    // 
+    // 아직은 사용 안함 
     static void readAreanaData()
     {
         using(var db = new LiteDB.LiteDatabase("./data/arena.data"))
